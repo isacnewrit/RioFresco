@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).parent.resolve()
 DADOS = BASE_DIR / "RioFresco-main" / "dados"
 ASSETS = BASE_DIR / "RioFresco-main" / "assets"
 
-ARQUIVO_FUNDO = "Design sem nome(3).png"
+ARQUIVO_FUNDO = "fundo.png"
 ARQUIVO_CLIMA = "clima_otimizado.csv"
 
 def get_b64(path):
