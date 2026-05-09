@@ -147,8 +147,14 @@ if not df_vuln.empty:
     
     with tab1:
         st.markdown("**Tamanho da Bolha:** % de Área Verde | **Cor:** Perfil de Risco")
+        
+        # --- FIX: Evita KeyError no groupby do Plotly x Pandas ---
+        # Remove linhas com valores nulos nas colunas utilizadas e garante o tipo string
+        df_clean = df_vuln.dropna(subset=["lat", "lon", "categoria_climatica", "percentual_verde", "IVT", "temp_max_media"]).copy()
+        df_clean["categoria_climatica"] = df_clean["categoria_climatica"].astype(str)
+
         fig_map = px.scatter_mapbox(
-            df_vuln, lat="lat", lon="lon", color="categoria_climatica", 
+            df_clean, lat="lat", lon="lon", color="categoria_climatica", 
             size="percentual_verde", hover_name="bairro", hover_data=["IVT", "temp_max_media"],
             color_discrete_map=color_discrete_map,
             zoom=10, mapbox_style="carto-darkmatter", height=500
